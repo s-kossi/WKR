@@ -1,0 +1,21 @@
+name: Deploy DEV Environment
+
+on:
+  push:
+    branches:
+      - dev  # Ce workflow s'exécute uniquement pour la branche main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to GitHub Pages (DEV)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./  # Dossier source, racine du dépôt
+          destination_dir: dev  # Déploie les fichiers dans la racine de gh-pages
